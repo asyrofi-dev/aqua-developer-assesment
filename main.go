@@ -14,6 +14,7 @@ func main() {
 	e := echo.New()
 
 	router.ProductRouter(e)
+	router.CartRouter(e)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
