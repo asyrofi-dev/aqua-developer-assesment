@@ -26,9 +26,16 @@ func Database() {
 }
 
 func Migrate() {
-	DB.Debug().AutoMigrate(
+	DB.Debug().Migrator().DropTable(
 		&entity.Product{},
 		&entity.Cart{},
 		&entity.CartDetail{},
+		&entity.Payment{},
+	)
+	DB.Debug().Migrator().AutoMigrate(
+		&entity.Product{},
+		&entity.Cart{},
+		&entity.CartDetail{},
+		&entity.Payment{},
 	)
 }

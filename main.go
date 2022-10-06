@@ -15,6 +15,7 @@ func main() {
 
 	router.ProductRouter(e)
 	router.CartRouter(e)
+	router.PaymentRouter(e)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }

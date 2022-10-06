@@ -1,44 +1,33 @@
 package handler
 
 import (
-	"aqua-developer-assesment/entity"
 	response "aqua-developer-assesment/entity/response"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 )
 
-func (handler ProductHandler) CreateProduct(c echo.Context) error {
+func (handler PaymentHandler) GetPayment(c echo.Context) error {
 	successResponse := response.SuccessResponse{Error: false}
 	errorResponse := response.ErrorResponse{Error: true}
 
-	var request entity.ProductRequest
-
-	err := c.Bind(&request)
+	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
 		errorResponse.Message = err.Error()
 		return c.JSON(http.StatusBadRequest, errorResponse)
 	}
 
-	photo, err := c.FormFile("photo")
+	result, err := handler.PaymentUC.GetPayment(id)
 
 	if err != nil {
 		errorResponse.Message = err.Error()
 		return c.JSON(http.StatusBadRequest, errorResponse)
 	}
 
-	request.Photo = photo
-
-	result, err := handler.ProductUC.CreateProduct(request)
-
-	if err != nil {
-		errorResponse.Message = err.Error()
-		return c.JSON(http.StatusBadRequest, errorResponse)
-	}
-
+	successResponse.Message = "Get Data Succeed"
 	successResponse.Data = result
-	successResponse.Message = "Create Product Succeed"
 
-	return c.JSON(http.StatusCreated, successResponse)
+	return c.JSON(http.StatusOK, successResponse)
 }

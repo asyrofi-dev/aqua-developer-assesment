@@ -21,5 +21,5 @@ type CartDetailResponse struct {
 	Product   ProductResponse `json:"item"`
 	Amount    uint            `json:"amount"`
 	CreatedAt time.Time       `json:"created_at"`
-	UpdatedAt time.Time       `json:"upload_at"`
+	UpdatedAt time.Time       `json:"updated_at"`
 }

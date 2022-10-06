@@ -8,11 +8,11 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (handler ProductHandler) CreateProduct(c echo.Context) error {
+func (handler PaymentHandler) CreatePayment(c echo.Context) error {
 	successResponse := response.SuccessResponse{Error: false}
 	errorResponse := response.ErrorResponse{Error: true}
 
-	var request entity.ProductRequest
+	var request entity.PaymentRequest
 
 	err := c.Bind(&request)
 
@@ -30,7 +30,7 @@ func (handler ProductHandler) CreateProduct(c echo.Context) error {
 
 	request.Photo = photo
 
-	result, err := handler.ProductUC.CreateProduct(request)
+	result, err := handler.PaymentUC.CreatePayment(request)
 
 	if err != nil {
 		errorResponse.Message = err.Error()
@@ -38,7 +38,7 @@ func (handler ProductHandler) CreateProduct(c echo.Context) error {
 	}
 
 	successResponse.Data = result
-	successResponse.Message = "Create Product Succeed"
+	successResponse.Message = "Create Payment Succeed"
 
 	return c.JSON(http.StatusCreated, successResponse)
 }
