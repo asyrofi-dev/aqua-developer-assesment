@@ -32,7 +32,7 @@ func (usecase ProductUsecase) CreateProduct(product entity.ProductRequest) (enti
 
 	defer src.Close()
 
-	filename := fmt.Sprintf("Product_%d%s", result.ID, filepath.Ext(product.Photo.Filename))
+	filename := fmt.Sprintf("product_%d%s", result.ID, filepath.Ext(product.Photo.Filename))
 
 	path := filepath.Join("public", "images", "products", filename)
 
