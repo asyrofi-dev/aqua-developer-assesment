@@ -6,10 +6,10 @@ import (
 	"github.com/jinzhu/copier"
 )
 
-func (usecase ProductUsecase) ListProducts() ([]entity.ProductResponse, error) {
+func (usecase ProductUsecase) SearchProducts(filter entity.ProductFilter) ([]entity.ProductResponse, error) {
 	var response []entity.ProductResponse
 
-	result, err := usecase.ProductRepo.ListProducts()
+	result, err := usecase.ProductRepo.SearchProducts(filter)
 
 	if err != nil {
 		return nil, err

@@ -11,6 +11,7 @@ type IProductRepository interface {
 	UpdateProduct(product entity.Product) (entity.Product, error)
 	ListProducts() ([]entity.Product, error)
 	GetProduct(id int) (entity.Product, error)
+	SearchProducts(filter entity.ProductFilter) ([]entity.Product, error)
 }
 
 type ProductRepository struct {

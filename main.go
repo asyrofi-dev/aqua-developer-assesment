@@ -9,7 +9,7 @@ import (
 
 func main() {
 	config.Database()
-	// config.Migrate()
+	config.Migrate()
 
 	e := echo.New()
 
