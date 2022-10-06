@@ -8,6 +8,7 @@ import (
 type IProductUsecase interface {
 	CreateProduct(product entity.ProductRequest) (entity.ProductResponse, error)
 	ListBooks() ([]entity.ProductResponse, error)
+	GetProduct(id int) (entity.ProductResponse, error)
 }
 
 type ProductUsecase struct {

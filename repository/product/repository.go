@@ -10,6 +10,7 @@ type IProductRepository interface {
 	CreateProduct(product entity.Product) (entity.Product, error)
 	UpdateProduct(product entity.Product) (entity.Product, error)
 	ListProducts() ([]entity.Product, error)
+	GetProduct(id int) (entity.Product, error)
 }
 
 type ProductRepository struct {
