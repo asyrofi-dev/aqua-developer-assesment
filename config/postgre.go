@@ -1,6 +1,7 @@
 package config
 
 import (
+	"aqua-developer-assesment/entity"
 	"log"
 	"os"
 
@@ -22,4 +23,8 @@ func Database() {
 	}
 
 	log.Println("Database Connection Succeed!")
+}
+
+func Migrate() {
+	DB.AutoMigrate(&entity.Product{})
 }
