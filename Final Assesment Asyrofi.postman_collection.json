@@ -1,0 +1,270 @@
+{
+	"info": {
+		"_postman_id": "6b86118e-d6c1-4ef3-8d92-86056c03ec65",
+		"name": "Final Assesment Asyrofi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Pakan Nila 1 Kg",
+									"type": "default"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/home/asyrofi/Downloads/WhatsApp Image 2022-09-29 at 12.22.30 PM.jpeg"
+								},
+								{
+									"key": "price",
+									"value": "65000",
+									"type": "default"
+								},
+								{
+									"key": "desc",
+									"value": "Pakan nila recommended",
+									"type": "default"
+								},
+								{
+									"key": "category",
+									"value": "pakan",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:1323/api/v1/products",
+							"host": [
+								"localhost"
+							],
+							"port": "1323",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:1323/api/v1/products",
+							"host": [
+								"localhost"
+							],
+							"port": "1323",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:1323/api/v1/products/3",
+							"host": [
+								"localhost"
+							],
+							"port": "1323",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:1323/api/v1/products?category=pakan&minprice=50000&maxprice=70000",
+							"host": [
+								"localhost"
+							],
+							"port": "1323",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "pakan"
+								},
+								{
+									"key": "minprice",
+									"value": "50000"
+								},
+								{
+									"key": "maxprice",
+									"value": "70000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Create Cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"items\":[\n        {\n            \"product_id\":2,\n            \"amount\":5\n        },\n        {\n            \"product_id\":1,\n            \"amount\":2\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:1323/api/v1/carts",
+							"host": [
+								"localhost"
+							],
+							"port": "1323",
+							"path": [
+								"api",
+								"v1",
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:1323/api/v1/carts/1",
+							"host": [
+								"localhost"
+							],
+							"port": "1323",
+							"path": [
+								"api",
+								"v1",
+								"carts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Folder",
+			"item": [
+				{
+					"name": "Create Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cart_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/home/asyrofi/Downloads/WhatsApp Image 2022-09-15 at 4.03.10 PM.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:1323/api/v1/payments",
+							"host": [
+								"localhost"
+							],
+							"port": "1323",
+							"path": [
+								"api",
+								"v1",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Payment",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Image",
+			"item": [
+				{
+					"name": "Get image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1323/api/v1/images/products/product_2.jpeg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1323",
+							"path": [
+								"api",
+								"v1",
+								"images",
+								"products",
+								"product_2.jpeg"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
