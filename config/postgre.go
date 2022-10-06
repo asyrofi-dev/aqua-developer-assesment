@@ -26,5 +26,5 @@ func Database() {
 }
 
 func Migrate() {
-	DB.AutoMigrate(&entity.Product{})
+	DB.Debug().AutoMigrate(&entity.Product{})
 }
