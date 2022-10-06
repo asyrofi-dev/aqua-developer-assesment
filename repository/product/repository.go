@@ -9,6 +9,7 @@ import (
 type IProductRepository interface {
 	CreateProduct(product entity.Product) (entity.Product, error)
 	UpdateProduct(product entity.Product) (entity.Product, error)
+	ListProducts() ([]entity.Product, error)
 }
 
 type ProductRepository struct {

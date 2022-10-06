@@ -16,4 +16,5 @@ func ProductRouter(e *echo.Echo) {
 
 	base := e.Group("/api/v1")
 	base.POST("/products", handler.CreateProduct)
+	base.GET("/products", handler.ListProducts)
 }
