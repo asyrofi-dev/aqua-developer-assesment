@@ -8,6 +8,16 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// Create Cart godoc
+// @Summary      Create new cart
+// @Description  Create new cart
+// @Tags         Cart
+// @Accept       json
+// @Produce      json
+// @Param        cart   body      entity.CartRequest  true "new cart"
+// @Success      201  {object}  response.SuccessResponse{data=entity.CartResponse}
+// @Failure      400  {object}  response.ErrorResponse
+// @Router       /carts [post]
 func (handler CartHandler) CreateCart(c echo.Context) error {
 	successResponse := response.SuccessResponse{Error: false}
 	errorResponse := response.ErrorResponse{Error: true}

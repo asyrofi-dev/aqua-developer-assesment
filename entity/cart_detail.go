@@ -13,13 +13,13 @@ type CartDetail struct {
 }
 
 type CartDetailRequest struct {
-	ProductID uint `json:"product_id"`
-	Amount    uint `json:"amount"`
+	ProductID uint `json:"product_id" example:"1"`
+	Amount    uint `json:"amount" example:"10"`
 }
 
 type CartDetailResponse struct {
 	Product   ProductResponse `json:"item"`
-	Amount    uint            `json:"amount"`
-	CreatedAt time.Time       `json:"created_at"`
-	UpdatedAt time.Time       `json:"updated_at"`
+	Amount    uint            `json:"amount" example:"10"`
+	CreatedAt time.Time       `json:"created_at" example:"2022-10-07T06:49:42.629210158+07:00"`
+	UpdatedAt time.Time       `json:"updated_at" example:"2022-10-07T06:49:42.629210158+07:00"`
 }

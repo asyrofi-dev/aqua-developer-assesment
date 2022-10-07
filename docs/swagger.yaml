@@ -1,0 +1,381 @@
+basePath: /api/v1
+definitions:
+  entity.CartDetailRequest:
+    properties:
+      amount:
+        example: 10
+        type: integer
+      product_id:
+        example: 1
+        type: integer
+    type: object
+  entity.CartDetailResponse:
+    properties:
+      amount:
+        example: 10
+        type: integer
+      created_at:
+        example: "2022-10-07T06:49:42.629210158+07:00"
+        type: string
+      item:
+        $ref: '#/definitions/entity.ProductResponse'
+      updated_at:
+        example: "2022-10-07T06:49:42.629210158+07:00"
+        type: string
+    type: object
+  entity.CartRequest:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/entity.CartDetailRequest'
+        type: array
+    type: object
+  entity.CartResponse:
+    properties:
+      created_at:
+        example: "2022-10-07T06:49:42.629210158+07:00"
+        type: string
+      id:
+        example: 1
+        type: integer
+      items:
+        items:
+          $ref: '#/definitions/entity.CartDetailResponse'
+        type: array
+      updated_at:
+        example: "2022-10-07T06:49:42.629210158+07:00"
+        type: string
+    type: object
+  entity.ErrorResponse:
+    properties:
+      error:
+        example: true
+        type: boolean
+      message:
+        example: Create Data Failed
+        type: string
+    type: object
+  entity.PaymentResponse:
+    properties:
+      cart:
+        $ref: '#/definitions/entity.CartResponse'
+      created_at:
+        example: "2022-10-07T06:49:42.629210158+07:00"
+        type: string
+      id:
+        example: 1
+        type: integer
+      photo:
+        example: /api/v1/images/payments/payment_1.jpeg
+        type: string
+      updated_at:
+        example: "2022-10-07T06:49:42.629210158+07:00"
+        type: string
+    type: object
+  entity.ProductResponse:
+    properties:
+      category:
+        example: pakan
+        type: string
+      created_at:
+        example: "2022-10-07T06:49:42.629210158+07:00"
+        type: string
+      desc:
+        example: Pakan lele berkualitas tinggi
+        type: string
+      id:
+        example: 1
+        type: integer
+      name:
+        example: Pakan Lele
+        type: string
+      photo:
+        example: /api/v1/images/products/product_1.jpeg
+        type: string
+      price:
+        example: 50000
+        type: integer
+      updated_at:
+        example: "2022-10-07T06:49:42.629210158+07:00"
+        type: string
+    type: object
+  entity.SuccessResponse:
+    properties:
+      data: {}
+      error:
+        example: false
+        type: boolean
+      message:
+        example: Create Data Succeed
+        type: string
+    type: object
+host: localhost:1323
+info:
+  contact:
+    email: asyrofimail@gmail.com
+    name: Muhammad Asyrofi
+  description: This is an API Documentation of ECommerce Management System.
+  title: ECommerce Management System API Documentation
+  version: "1.0"
+paths:
+  /carts:
+    post:
+      consumes:
+      - application/json
+      description: Create new cart
+      parameters:
+      - description: new cart
+        in: body
+        name: cart
+        required: true
+        schema:
+          $ref: '#/definitions/entity.CartRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/entity.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/entity.CartResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.ErrorResponse'
+      summary: Create new cart
+      tags:
+      - Cart
+  /carts/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get single cart
+      parameters:
+      - description: cart_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/entity.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/entity.CartResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.ErrorResponse'
+      summary: Get single cart
+      tags:
+      - Cart
+  /images/{path}/{filename}:
+    get:
+      consumes:
+      - application/json
+      description: Get image
+      parameters:
+      - description: file path
+        in: path
+        name: path
+        required: true
+        type: string
+      - description: file name
+        in: path
+        name: filename
+        required: true
+        type: string
+      produces:
+      - image/jpeg
+      - image/png
+      responses: {}
+      summary: Get image
+      tags:
+      - Images
+  /payments:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Create new payment
+      parameters:
+      - example: 1
+        in: formData
+        name: cartID
+        type: integer
+      - example: transfer.jpeg
+        in: formData
+        name: photo
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/entity.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/entity.PaymentResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.ErrorResponse'
+      summary: Create new payment
+      tags:
+      - Payment
+  /payments/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get single payment
+      parameters:
+      - description: payment_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/entity.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/entity.PaymentResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.ErrorResponse'
+      summary: Get single payment
+      tags:
+      - Payment
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: Get all product
+      parameters:
+      - description: product category
+        in: query
+        name: category
+        type: string
+      - description: product minimum price
+        in: query
+        name: min_price
+        type: integer
+      - description: product maximum price
+        in: query
+        name: max_price
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/entity.SuccessResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/entity.ProductResponse'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.ErrorResponse'
+      summary: Get all product
+      tags:
+      - Product
+    post:
+      consumes:
+      - multipart/form-data
+      description: Create new product
+      parameters:
+      - example: pakan
+        in: formData
+        name: category
+        type: string
+      - example: pakan lele berkualitas tinggi
+        in: formData
+        name: description
+        type: string
+      - example: Pakan Lele
+        in: formData
+        name: name
+        type: string
+      - example: pakan_lele.jpeg
+        in: formData
+        name: photo
+        type: string
+      - example: 50000
+        in: formData
+        name: price
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/entity.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/entity.ProductResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.ErrorResponse'
+      summary: Create new product
+      tags:
+      - Product
+  /products/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get single product
+      parameters:
+      - description: product_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/entity.SuccessResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/entity.ProductResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.ErrorResponse'
+      summary: Get single product
+      tags:
+      - Product
+swagger: "2.0"

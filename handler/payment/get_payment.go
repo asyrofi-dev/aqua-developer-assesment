@@ -8,6 +8,16 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// Get Single Payment godoc
+// @Summary      Get single payment
+// @Description  Get single payment
+// @Tags         Payment
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true "payment_id"
+// @Success      201  {object}  response.SuccessResponse{data=entity.PaymentResponse}
+// @Failure      400  {object}  response.ErrorResponse
+// @Router       /payments/{id} [get]
 func (handler PaymentHandler) GetPayment(c echo.Context) error {
 	successResponse := response.SuccessResponse{Error: false}
 	errorResponse := response.ErrorResponse{Error: true}

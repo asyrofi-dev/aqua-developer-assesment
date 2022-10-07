@@ -10,6 +10,18 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// Get All Product godoc
+// @Summary      Get all product
+// @Description  Get all product
+// @Tags         Product
+// @Accept       json
+// @Produce      json
+// @Param        category   query      string  false "product category"
+// @Param        min_price   query      int  false "product minimum price"
+// @Param        max_price   query      int  false "product maximum price"
+// @Success      201  {object}  response.SuccessResponse{data=[]entity.ProductResponse}
+// @Failure      400  {object}  response.ErrorResponse
+// @Router       /products [get]
 func (handler ProductHandler) ListProducts(c echo.Context) error {
 	successResponse := response.SuccessResponse{Error: false}
 	errorResponse := response.ErrorResponse{Error: true}
