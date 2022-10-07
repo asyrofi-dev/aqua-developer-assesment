@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+  app:
+    container_name: golang_container
+    tty: true
+    build: .
+    ports:
+      - 1323:1323
+    restart: on-failure
+    volumes:
+      - .:/app
+    depends_on:
+      - postgresdb
+    networks:
+      - learning
+
+  postgresdb:
+    image: postgres:latest
+    container_name: postgres_container
+    environment:
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=final_assesment
+    ports:
+      - '1234:5432'
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    networks:
+      - learning
+
+volumes:
+  pg_data:
+  pg_data_test:
+
+# Networks to be created to facilitate communication between containers
+networks:
+  learning:
+    driver: bridge
